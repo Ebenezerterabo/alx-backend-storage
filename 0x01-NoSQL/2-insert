@@ -1,4 +1,4 @@
 // A script that inserts a document in the collection school
 db.school.insert({
-    _id: "Holberton school"
+    name: "Holberton school"
 })
