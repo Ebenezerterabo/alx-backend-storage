@@ -2,7 +2,7 @@
 """ Exercise module. """
 import redis
 import uuid
-from typing import Callable
+from typing import Callable, Union
 
 
 class Cache:
@@ -15,7 +15,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(self, data: str) -> str:
+    def store(self, data: Union[bytes, str, int, float]) -> str:
         """
         Stores given data in Redis and returns its key.
 
