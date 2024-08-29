@@ -32,14 +32,17 @@ def replay(method: Callable) -> None:
     """ Prints the history of calls. """
     name = method.__qualname__
     redis = method.__self__._redis
+    # Get the list of inputs and outputs
     inputs = redis.lrange(name + ":inputs", 0, -1)
     outputs = redis.lrange(name + ":outputs", 0, -1)
-
+    # Print total number of calls
     print("{} was called {} times:".format(name, redis.get(name)))
-    for i in range(len(inputs)):
-        inp = inputs[i].decode("utf-8")
-        out = outputs[i].decode("utf-8")
-        print("{}(*{}) -> {}".format(name, inp, out))
+
+    # Iterate the total number of calls
+    for inp, out in zip(inputs, outputs):
+        inp_decoded = inp.decode("utf-8")
+        out_decoded = out.decode("utf-8")
+        print("{}(*{}) -> {}".format(name, inp_decoded, out_decoded))
 
 
 class Cache:
