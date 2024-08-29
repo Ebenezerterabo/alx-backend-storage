@@ -46,6 +46,7 @@ def replay(method: Callable) -> None:
 
 
 class Cache:
+    """ Cache class. """
     def __init__(self):
         """
         Instantiates a new Cache object.
